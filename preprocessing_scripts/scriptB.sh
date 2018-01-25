@@ -4,11 +4,6 @@
 #
 #
 
-
-
-
-
-
 ## set dummy display
 Xvfb :88 & 
 export DISPLAY=:88

@@ -3,7 +3,6 @@
 #
 # the steps include:
 # - deobliquing images
-# - aligning the functional to the structural image
 # - skull stripping 
 # - slice time correction
 # - aligning the functional to structural image
