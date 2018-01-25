@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+#SBATCH --array=0-0
+#SBATCH --job-name=100
+#SBATCH --output=slurm_%a.out
+/usr/lib/R/bin/Rscript --vanilla ~/preprocessing/preprocessing_scripts/waveletCorrelation.R
