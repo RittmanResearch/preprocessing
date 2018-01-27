@@ -19,7 +19,7 @@
 Xvfb :88 & 
 export DISPLAY=:88
 
-###make directory
+####make directory
 mkdir preprocessing
 cp *Resting_State*/FUNCTIONAL_????.nii preprocessing/FUNCTIONAL.nii
 cp *MPRAGE*/DATA_????.nii preprocessing/DATA.nii
@@ -79,6 +79,13 @@ cat_matvec -ONELINE ./__tt_DATA_do_ns_obla2e_mat.1D ./DATA_do_al_e2a_only_mat.af
 ## segment functional dataset
 1d_tool.py -demean -infile FUNCTIONAL_do_al_reg_mat.aff12.1D -write motion_dm.1D
 1d_tool.py -demean -derivative -infile FUNCTIONAL_do_al_reg_mat.aff12.1D -write motion_deriv.1D
+
+## skull strip functional image
+3dAFNItoNIFTI FUNCTIONAL_do_al+tlrc
+
+# temporary line
+rm FUNCTIONAL_do_al_ss.nii
+bet FUNCTIONAL_do_al FUNCTIONAL_do_al_ss -F
 
 ## return to home directory
 cd ../

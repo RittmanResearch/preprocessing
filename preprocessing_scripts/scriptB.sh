@@ -10,17 +10,16 @@ export DISPLAY=:88
 
 ##move in to directory
 cd preprocessing
-3dcalc -expr 'a' -a ./FUNCTIONAL_wds.nii.gz[5] -prefix _eBmask.nii # this line takes only the 5th image of the functional data
-bet _eBmask.nii eBmask.nii
+3dcalc -expr 'a' -a ./FUNCTIONAL_wds.nii.gz[5] -prefix eBmask.nii # this line takes only the 5th image of the functional data
 3dcalc -a eBmask.nii -b eBmask.nii -expr 'a/b' -prefix eBmask_bin.nii
 fast -t 2 -n 3 -H 0.1 -I 4 -l 20.0 -b -o eBmask eBmask.nii # use the 5th volume for segmentation
 1dcat motion_dm.1D motion_deriv.1D > FUNCTIONAL_reg_baseline_pre.1D # obtain motion derivatives
 3dBrickStat -mask eBmask.nii -percentile 50 1 50  _eBmask.nii[0] > gms.1D
 gms=`cat gms.1D`; gmsa=($gms); p50=${gmsa[1]}
-3dBlurInMask -fwhm 5mm -mask eBmask.nii -prefix ./FUNCTIONAL_sm.nii ./FUNCTIONAL_wds.nii.gz
-3dcalc -overwrite -a ./FUNCTIONAL_sm.nii -expr 'a*1000' -prefix ./FUNCTIONAL_sm.nii
-3dcalc -overwrite -a ./FUNCTIONAL_sm.nii -expr "a/$p50" -prefix ./FUNCTIONAL_sm.nii
-3dTstat -prefix ./FUNCTIONAL_mean.nii ./FUNCTIONAL_sm.nii
+# 3dBlurInMask -fwhm 5mm -mask eBmask.nii -prefix ./FUNCTIONAL_sm.nii ./FUNCTIONAL_wds.nii.gz # spatial smoothing
+3dcalc -overwrite -a ./FUNCTIONAL_wds.nii.gz -expr 'a*1000' -prefix ./FUNCTIONAL_wds.nii.gz
+3dcalc -overwrite -a ./FUNCTIONAL_wds.nii.gz -expr "a/$p50" -prefix ./FUNCTIONAL_wds.nii.gz
+3dTstat -prefix ./FUNCTIONAL_mean.nii ./FUNCTIONAL_wds.nii.gz
 3dcalc -overwrite -a ./FUNCTIONAL_wds.nii.gz -b ./FUNCTIONAL_mean.nii -expr 'a+b' -prefix ./FUNCTIONAL_wds.nii.gz
 3dTproject -ort FUNCTIONAL_do_al_reg_mat.aff12.1D -prefix ./FUNCTIONAL_pppre.nii -bandpass 0.01 99 -input ./FUNCTIONAL_wds.nii.gz
 echo Downsampling anatomical and segmenting with FSL FAST...
