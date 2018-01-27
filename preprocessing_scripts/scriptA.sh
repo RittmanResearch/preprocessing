@@ -82,9 +82,6 @@ cat_matvec -ONELINE ./__tt_DATA_do_ns_obla2e_mat.1D ./DATA_do_al_e2a_only_mat.af
 
 ## skull strip functional image
 3dAFNItoNIFTI FUNCTIONAL_do_al+tlrc
-
-# temporary line
-rm FUNCTIONAL_do_al_ss.nii
 bet FUNCTIONAL_do_al FUNCTIONAL_do_al_ss -F
 
 ## return to home directory
