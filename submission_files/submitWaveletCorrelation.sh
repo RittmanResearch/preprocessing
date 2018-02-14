@@ -1,7 +1,7 @@
 wd=`pwd`
-for i in */*/*/preprocessing ; do
+for i in */*/*/timeseries ; do
+ echo $i
  cd $i
- rm slurm_waveletCorrelation.hphi
  sbatch ~/preprocessing/slurm_files/slurm_waveletCorrelation.hphi
  cd $wd
 done

@@ -1,8 +1,8 @@
 #!/bin/bash
 cwd=`pwd`
-for i in */*/*/preprocessing ; do
+for i in */*/*; do
+ echo $i
  cd $i
- ln -s /home/tr332/imageAnalysis/slurm_submitTSScript.hphi .
- sbatch slurm_submitTSScript.hphi
+ sbatch /home/tr332/preprocessing/slurm_files/slurm_submitTSScript.hphi
  cd $cwd
 done 

@@ -10,22 +10,22 @@
 
 #! sbatch directives begin here ###############################
 #! Name of the job: speedy
-#SBATCH -J scriptB 
+#SBATCH -J spmNormalise 
 
 #! Which project should jobs run under:
 #SBATCH -A hphi
 
 #! What QoS should the job run in?
-#SBATCH --qos=long.q
+#SBATCH --qos=short.q
 
 #! How much resource should be allocated?
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
-#SBATCH --cpus-per-task=1
+#SBATCH --cpus-per-task=2
 #SBATCH --mem=50000
 
 #! How much wall-clock time will be required?
-#SBATCH --time=02:00:00
+#SBATCH --time=04:00:00
 
 #! What e-mail address to use for notifications?
 #! Insert your mail address here for job notifications
@@ -58,7 +58,7 @@ module load default-wbic                   # REQUIRED - loads the basic environm
 #! Insert additional module load commands after this line if needed:
 
 #! Full path to your application executable: 
-application="/home/tr332/preprocessing/preprocessing_scripts/scriptB.sh"
+application="/home/tr332/preprocessing/preprocessing_scripts/spm/bash_spm.sh"
 
 #! Run options for the application:
 options=""
